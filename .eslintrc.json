@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "react-app"
+  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "localStorage": true,
+    "window": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "semi": [2, "always"],
+    "max-len": [2, { "code": 120 }],
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "jsx-quotes": [2, "prefer-double"],
+    "camelcase": 0
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "parser": "@typescript-eslint/parser"
+}
