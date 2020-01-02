@@ -1,0 +1,3 @@
+# ignore package-lock.json in diffs to avoid noise
+package-lock.json binary
+
