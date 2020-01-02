@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from 'graphql/client';
+import Login from 'components/Login/Login';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#2196F3' },
+  },
+});
 
 const App: React.FC = () => {
+  const cachedToken = localStorage.getItem('token');
+  const urlCode = new URLSearchParams(window.location.search).get('code');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <Login open={!cachedToken && !urlCode} />
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };
 
