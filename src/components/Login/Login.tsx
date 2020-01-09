@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dialog, Typography, Box } from '@material-ui/core';
 import { ReactComponent as GithubIcon } from 'assets/img/icons/github-icon.svg';
-import config from 'utils/config';
+import config from 'data/config';
 
 interface PropTypes {
   open: boolean;
