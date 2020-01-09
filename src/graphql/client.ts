@@ -2,7 +2,7 @@ import { InMemoryCache } from 'apollo-boost';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
-import config from 'utils/config';
+import config from 'data/config';
 
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
