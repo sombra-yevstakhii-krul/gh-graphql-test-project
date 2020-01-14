@@ -7,7 +7,7 @@ import UserRepos from 'components/UserRepos/UserRepos';
 const List = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1250px;
   height: 100%;
 `;
 
@@ -39,8 +39,9 @@ const UserReposContainer: React.FC<PropTypes> = ({ selectedUsers }) => {
 
     const left = (containerWidth / 3) * columnIndex;
     const top = columnsHeights[columnIndex];
-    columnsHeights[columnIndex] += itemsHeights[child] || 0;
-    // X = container width / number of columns * column index, Y = height of the current column
+    columnsHeights[columnIndex] += itemsHeights[child] + 30 || 0;
+    // X = container width / number of columns * column index, Y = height of the
+    // current column + 30px margin
 
     return { login: child, left, top, width: containerWidth / 3, height: itemsHeights[child] || 0 };
   });

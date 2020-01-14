@@ -1,12 +1,12 @@
 import React from 'react';
-import { USERS_QUERY } from 'queries/user';
+import { USERS_AVATARS_QUERY } from 'queries/user';
 import { render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import UsersList from 'components/UsersList/UsersList';
 
 const mocks = [
   {
-    request: { query: USERS_QUERY },
+    request: { query: USERS_AVATARS_QUERY },
     result: {
       data: {
         sombraPavloDaniv: {
