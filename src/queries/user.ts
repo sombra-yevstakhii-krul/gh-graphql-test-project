@@ -52,7 +52,7 @@ export interface UserReposVars {
 }
 
 export const USER_REPOS_QUERY = gql`
-  query UserRepos($login: String!) {
+  query userRepos($login: String!) {
     user(login: $login) {
       id
       avatarUrl(size: 55)

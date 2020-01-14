@@ -51,7 +51,7 @@ const UserReposContainer: React.FC<PropTypes> = ({ selectedUsers }) => {
     enter: ({ left, top, width, height }) => ({ left, top, width, height, opacity: 1 }),
     update: ({ left, top, width, height }) => ({ left, top, width, height }),
     leave: { height: 0, opacity: 0 },
-    config: { mass: 5, tension: 500, friction: 100 },
+    config: { mass: 1, tension: 500, friction: 40 },
     trail: 25,
   });
 
