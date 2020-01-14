@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, Fragment } from 'react';
+import React, { useLayoutEffect, Fragment, useState } from 'react';
 import { Paper, Box, Grid, Avatar, Typography, Chip, Button, Divider } from '@material-ui/core';
 import useMeasure from 'utils/useMeasure';
 import { TransitionPhase } from 'react-spring';
@@ -7,6 +7,7 @@ import { USER_REPOS_QUERY, UserReposQuery, UserReposVars } from 'queries/user';
 import { Skeleton } from '@material-ui/lab';
 import { Add } from '@material-ui/icons';
 import styled from 'styled-components';
+import ReadmeModal from 'components/ReadmeModal/ReadmeModal';
 
 const RoundedSkeleton = styled(Skeleton).attrs({ variant: 'rect' })`
   border-radius: 50px;
@@ -26,9 +27,12 @@ interface PropTypes {
 const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, phase }) => {
   const { data, loading } = useQuery<UserReposQuery, UserReposVars>(USER_REPOS_QUERY, {
     variables: { login },
+    pollInterval: 60000,
   });
 
   const [ref, { height }] = useMeasure();
+
+  const [readmeRepoId, setReadmeRepoId] = useState<string | null>(null);
 
   useLayoutEffect(() => {
     if (prevHeight !== height && phase === 'update') {
@@ -77,6 +81,11 @@ const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, 
 
   return (
     <Paper ref={ref}>
+      <ReadmeModal
+        open={!!readmeRepoId}
+        repoId={readmeRepoId}
+        onClose={(): void => setReadmeRepoId(null)}
+      />
       <Box p={3} mb={3} overflow="hidden">
         <Grid container spacing={2} direction="column">
           <Grid item container spacing={2} wrap="nowrap">
@@ -84,7 +93,7 @@ const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, 
               <Avatar src={data?.user.avatarUrl}></Avatar>
             </Grid>
             <Grid item>
-              <Typography variant="body1">{data?.user.login}</Typography>
+              <Typography variant="h6">{data?.user.login}</Typography>
               <Chip
                 label={`Follow (${data?.user.followers.totalCount})`}
                 icon={<Add />}
@@ -97,8 +106,12 @@ const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, 
               {i !== 0 && <Divider />}
               <Box pt={1} pb={3}>
                 <Box display="flex" justifyContent="space-between">
-                  <Typography variant="h6">{repo.name}</Typography>
-                  <ReadmeButton variant="text" color="primary">
+                  <Typography variant="body1">{repo.name}</Typography>
+                  <ReadmeButton
+                    variant="text"
+                    color="primary"
+                    onClick={(): void => setReadmeRepoId(repo.id)}
+                  >
                     View README.md
                   </ReadmeButton>
                 </Box>
