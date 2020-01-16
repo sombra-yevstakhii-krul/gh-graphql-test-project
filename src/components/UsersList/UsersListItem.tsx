@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Chip, Avatar } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import { USERS_QUERY } from 'queries/user';
+import { USERS_AVATARS_QUERY } from 'queries/user';
 import camelCase from 'lodash/camelCase';
 
 const StyledChip = withTheme(styled(Chip)`
@@ -33,7 +33,7 @@ interface PropTypes {
 }
 
 const UsersListItem: React.FC<PropTypes> = ({ login, selected, onClick }) => {
-  const { data, loading } = useQuery(USERS_QUERY);
+  const { data, loading } = useQuery(USERS_AVATARS_QUERY);
 
   return loading ? (
     <LoadingChip />

@@ -22,7 +22,7 @@ const Login: React.FC<PropTypes> = ({ open }) => {
           display="block"
           color="primary"
           // eslint-disable-next-line max-len
-          href={`https://github.com/login/oauth/authorize?client_id=${config.githubClientId}&scope=repo%20user`}
+          href={`https://github.com/login/oauth/authorize?client_id=${config.githubClientId}&scope=repo%20user%20notifications`}
         >
           Login using github
         </Typography>
