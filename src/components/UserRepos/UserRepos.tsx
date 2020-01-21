@@ -28,7 +28,7 @@ interface PropTypes {
 }
 
 const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, phase }) => {
-  const { data, loading } = useQuery<UserReposQuery, UserReposVars>(USER_REPOS_QUERY, {
+  const { data, loading, error } = useQuery<UserReposQuery, UserReposVars>(USER_REPOS_QUERY, {
     variables: { login },
     pollInterval: 60000,
   });
@@ -61,7 +61,7 @@ const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, 
 
   return (
     <Paper ref={ref}>
-      {loading ? (
+      {loading || error ? (
         <UserReposLoading />
       ) : (
         <>

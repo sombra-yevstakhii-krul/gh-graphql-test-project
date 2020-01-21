@@ -1,10 +1,12 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/react-hooks';
-import client from 'graphql/client';
 import Login from 'components/Login/Login';
 import { createMuiTheme, ThemeProvider, StylesProvider } from '@material-ui/core';
 import AppContainer from 'components/AppContainer/AppContainer';
 import { createGlobalStyle } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+import ClientProvider from 'graphql/ClientProvider';
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -29,15 +31,16 @@ const App: React.FC = () => {
   const urlCode = new URLSearchParams(window.location.search).get('code');
 
   return (
-    <ApolloProvider client={client}>
+    <ClientProvider>
       <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
+          <ToastContainer position="bottom-right" newestOnTop />
           <Login open={!cachedToken && !urlCode} />
           <AppContainer />
           <GlobalStyles />
         </StylesProvider>
       </ThemeProvider>
-    </ApolloProvider>
+    </ClientProvider>
   );
 };
 

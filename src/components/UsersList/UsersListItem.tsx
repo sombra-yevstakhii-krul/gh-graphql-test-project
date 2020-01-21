@@ -4,7 +4,6 @@ import { Chip, Avatar } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import { USERS_AVATARS_QUERY } from 'queries/user';
-import camelCase from 'lodash/camelCase';
 
 const StyledChip = withTheme(styled(Chip)`
   margin: 20px;
@@ -33,14 +32,16 @@ interface PropTypes {
 }
 
 const UsersListItem: React.FC<PropTypes> = ({ login, selected, onClick }) => {
-  const { data, loading } = useQuery(USERS_AVATARS_QUERY);
+  const { data, loading } = useQuery(USERS_AVATARS_QUERY, {
+    variables: { login },
+  });
 
   return loading ? (
     <LoadingChip />
   ) : (
     <StyledChip
       color={selected ? 'primary' : 'default'}
-      avatar={<Avatar src={data?.[camelCase(login)]?.avatarUrl} />}
+      avatar={<Avatar src={data?.user?.avatarUrl} />}
       label={loading ? '' : login}
       onClick={onClick}
     />
