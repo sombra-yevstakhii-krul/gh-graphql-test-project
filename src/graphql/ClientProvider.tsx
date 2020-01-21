@@ -19,14 +19,16 @@ const errorLink = onError(
   ({ networkError, operation, forward }) =>
     new Observable(observer => {
       if (networkError) {
-        const retry = (): void => {
-          const subscriber = {
-            next: observer.next.bind(observer),
-          };
-          forward(operation).subscribe(subscriber);
-          window.removeEventListener('online', retry);
-        };
-        window.addEventListener('online', retry);
+        window.addEventListener(
+          'online',
+          (): void => {
+            const subscriber = {
+              next: observer.next.bind(observer),
+            };
+            forward(operation).subscribe(subscriber);
+          },
+          { once: true }
+        );
       }
     })
 );
