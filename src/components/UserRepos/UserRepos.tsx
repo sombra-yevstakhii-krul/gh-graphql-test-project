@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, Fragment, useState } from 'react';
 import { Paper, Box, Grid, Avatar, Typography, Chip, Button, Divider } from '@material-ui/core';
-import useMeasure from 'utils/useMeasure';
+import useMeasure from 'hooks/useMeasure';
 import { TransitionPhase } from 'react-spring';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { USER_REPOS_QUERY, UserReposQuery, UserReposVars } from 'queries/user';
