@@ -3,6 +3,7 @@ import { USER_REPOS_QUERY } from 'queries/user';
 import { render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import UserRepos from './UserRepos';
+import 'mocks/matchMedia.mock';
 
 const mocks = [
   {

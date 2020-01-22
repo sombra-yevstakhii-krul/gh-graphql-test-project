@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 import { LocalStorageMock } from '@react-mock/localstorage';
+import 'mocks/matchMedia.mock';
 
 describe('App component', () => {
   test('renders login link without token', async () => {

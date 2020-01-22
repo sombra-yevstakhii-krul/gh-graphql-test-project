@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import AppContainer from 'components/AppContainer/AppContainer';
 import { act } from 'react-dom/test-utils';
+import 'mocks/matchMedia.mock';
 
 it('toggles selected user on click', async () => {
   const { findByText } = render(
