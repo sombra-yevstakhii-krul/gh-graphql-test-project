@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useTransition, animated, to } from 'react-spring';
-import useMeasure from 'utils/useMeasure';
+import React from 'react';
+import { animated, to } from 'react-spring';
 import styled from 'styled-components';
 import UserRepos from 'components/UserRepos/UserRepos';
+import useMasonryGrid from 'hooks/useMasonryGrid';
 
 const List = styled.div`
   position: relative;
@@ -25,35 +25,9 @@ interface PropTypes {
 // The idea is taken from https://codesandbox.io/embed/26mjowzpr
 
 const UserReposContainer: React.FC<PropTypes> = ({ selectedUsers }) => {
-  const [measureRef, { width: containerWidth }] = useMeasure();
-
-  const [itemsHeights, setItemsHeights] = useState<{ [user: string]: number }>({});
-  const setItemHeight = (i: string) => (value: number): void => {
-    setItemsHeights(prevHeights => ({ ...prevHeights, [i]: value }));
-  };
-
-  const columnsHeights = [0, 0, 0];
-  const gridItems = selectedUsers.map(child => {
-    const columnIndex = columnsHeights.indexOf(Math.min(...columnsHeights));
-    // Basic masonry-grid placing, puts tile into the smallest column using Math.min
-
-    const left = (containerWidth / 3) * columnIndex;
-    const top = columnsHeights[columnIndex];
-    columnsHeights[columnIndex] += itemsHeights[child] + 30 || 0;
-    // X = container width / number of columns * column index, Y = height of the
-    // current column + 30px margin
-
-    return { login: child, left, top, width: containerWidth / 3, height: itemsHeights[child] || 0 };
-  });
-
-  const transitions = useTransition(gridItems, (item: { login: string }) => item.login, {
-    from: ({ left, top, width, height }) => ({ left, top, width, height, opacity: 0 }),
-    enter: ({ left, top, width, height }) => ({ left, top, width, height, opacity: 1 }),
-    update: ({ left, top, width, height }) => ({ left, top, width, height }),
-    leave: { height: 0, opacity: 0 },
-    config: { mass: 1, tension: 500, friction: 40 },
-    trail: 25,
-  });
+  const { transitions, measureRef, setItemHeight, columnsHeights, itemsHeights } = useMasonryGrid(
+    selectedUsers
+  );
 
   return (
     <List ref={measureRef} style={{ height: Math.max(...columnsHeights) }}>

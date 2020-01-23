@@ -11,7 +11,7 @@ interface PropTypes {
 const Login: React.FC<PropTypes> = ({ open }) => {
   return (
     <Dialog open={open}>
-      <Box px={15} py={4}>
+      <Box px={[3, 5, 15]} py={4}>
         <Box pb={4}>
           <GithubIcon />
         </Box>
