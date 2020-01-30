@@ -93,7 +93,7 @@ const UserRepos: React.FC<PropTypes> = ({ login, setHeight, height: prevHeight, 
               {data?.user.repositories.nodes.map((repo, i) => (
                 <Fragment key={repo.id}>
                   {i !== 0 && <Divider />}
-                  <Box pt={1} pb={3}>
+                  <Box pt={1} pb={3} className="repo">
                     <Box display="flex" justifyContent="space-between">
                       <Typography variant="body1">{repo.name}</Typography>
                       <ReadmeButton
