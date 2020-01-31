@@ -7,7 +7,12 @@ export default function useMeasure(): [
 ] {
   const ref = useRef<HTMLDivElement>(null);
   const [bounds, set] = useState({ left: 0, top: 0, width: 0, height: 0 });
-  const [observer] = useState(() => new ResizeObserver(([{ contentRect }]) => set(contentRect)));
+  const [observer] = useState(
+    () =>
+      new ResizeObserver(([{ contentRect }]) =>
+        window.requestAnimationFrame(() => set(contentRect))
+      )
+  );
   useLayoutEffect(() => {
     if (ref.current) {
       observer.observe(ref.current);

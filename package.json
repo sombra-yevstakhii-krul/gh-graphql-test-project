@@ -23,6 +23,7 @@
     "apollo-cache-persist": "^0.1.1",
     "apollo-link-context": "^1.0.19",
     "apollo-link-error": "^1.1.12",
+    "cypress": "^3.8.3",
     "graphql": "^14.5.8",
     "lodash": "^4.17.15",
     "react": "^16.12.0",
@@ -39,7 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -57,12 +59,14 @@
     ]
   },
   "devDependencies": {
+    "@rckeller/cypress-unfetch": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^2.13.0",
     "@typescript-eslint/parser": "^2.13.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-react": "^1.1.7",
     "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-cypress": "^2.8.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",

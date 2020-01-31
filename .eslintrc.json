@@ -1,7 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,"cypress/globals": true
   },
   "extends": [
     "standard",
@@ -9,6 +9,7 @@
     "prettier/react",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:cypress/recommended",
     "prettier/@typescript-eslint",
     "react-app"
   ],
